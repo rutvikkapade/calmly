@@ -1,0 +1,8 @@
+com\nirvana\calmly\Data\UserRepository.class
+com\nirvana\calmly\UserDetailsServiceImpl.class
+com\nirvana\calmly\Controller\AppController.class
+com\nirvana\calmly\Security\SecurityConfiguration.class
+com\nirvana\calmly\CalmlyApplication.class
+com\nirvana\calmly\Users\MyUserDetails.class
+com\nirvana\calmly\Controller\RegistrationController.class
+com\nirvana\calmly\Users\User.class

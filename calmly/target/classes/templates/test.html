@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+	<title>Calmly</title>
+</head>
+<style type="text/css">
+		body {
+			background-image: linear-gradient( 109.6deg,  rgba(238,58,136,1) 11.2%, rgba(128,162,245,1) 91.1% );
+	background-size: 1000% 1000%;
+	animation: gradient 12s ease infinite;
+}
+#holder{
+	margin-top: 20%;
+	width: auto; 
+  height: auto;
+  
+}
+text{
+	font-family: 'Dancing Script', cursive;
+	color: white;
+	font-size: 74px;
+	font-weight: bold;
+}
+#holder button{
+	font-family: 'Roboto',sans-serif;
+	background-color: white;
+	color: transparent;
+	font-size: 20px;
+	font-weight: bold;
+	outline: none;
+	border: none;
+	padding: 5px;
+	border-radius: 10px;
+	width: 100px;
+	  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+background-image: linear-gradient( 109.6deg,  rgba(238,58,136,1) 11.2%, rgba(128,162,245,1) 91.1% );
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	 
+}
+#buttonHolder{
+	background-color: white;
+	border-radius: 10px;
+	width: 100px;
+}
+#holder img{
+	width: 35px;
+	height: auto;
+	transition: .2s width;
+}
+#holder img:hover{
+	width: 45px;
+	height: auto;
+	
+}
+.form-control{
+	font-family: 'Poppins', sans-serif;
+	width: 45%;
+	border: none;
+	outline: none;
+	font-size: 17px;
+	background-color: #D8D8D8;
+	border-radius: 20px 20px;
+	text-align: center;
+}
+.buttonOne{
+	padding: 5px;
+	border : none;
+	font-size: 17px;
+	color: white;
+	border: 2px solid white;
+	outline: none;
+	width: 45%;
+	border-radius: 20px 20px;
+	background-color: #09bf28;
+	transition: background-color .3s;
+	font-family: 'Poppins', sans-serif;
+}
+.buttonOne:hover{
+	cursor: pointer;
+	background-color: #0a2f04;
+	color:white ;
+}
+::placeholder{
+	text-align: center;
+}
+.loginHeading{
+	color: #0a2551;
+	font-size: 24px;
+	font-family: 'Poppins', sans-serif;
+}
+.loginHolder{
+	width: 45%;
+	padding: 25px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#login{
+	display: none;
+}
+#signUp{
+	display: none;
+}
+.signUpHolder{
+	margin-top: 15%;
+	width: 45%;
+	padding: 25px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+@media only screen and (max-width: 600px) {
+  #holder{
+  	margin-top: 75%;
+  }
+  .loginHolder{
+  	margin-top: 60%;
+  	width: 90%;
+  }
+  .signUpHolder{
+  	margin-top: 40%;
+  	width: 90%;
+  }
+  .form-control{
+  	width: 80%;
+  }
+  .buttonOne{
+  	width: 80%;
+  }
+}
+
+</style>
+<body>
+<section id="welcome">
+	<center><div id="holder">
+	<center><text>calm.ly</text></center>
+	<br>
+	<img onclick="showLogin()" th:src="@{images/arrow.png}"/>
+</div></center>	
+</section>
+<section id="login">
+	<center><div  class="loginHolder form-group">
+		<center><text class="loginHeading">Members Login</text></center>
+		<br>
+		<form name="f" th:action="@{/login}" method="post">               
+            <input class="form-control" type="text" name="username" placeholder="username" required>
+            <br>
+            <input class="form-control" type="password" name="password" placeholder="password" required>
+            <br>
+            <input value="Login" class="buttonOne" type="submit" name="">
+        </form>
+        <br>
+        <a onclick="showSignUp()">Sign Up!</a>
+	</div></center>	
+</section>
+<section id="signUp">
+	<center><div id="signUpHolder" class="signUpHolder form-group">
+	<center><text class="loginHeading" id="inform">Sign Up</text></center>
+	<br>
+	<form class="form-group" id="signUpForm">
+		<input class="form-control" type="text" name="username" placeholder="username" required>
+            <br>
+            <input class="form-control" type="date" name="date">
+            <br>
+            <input class="form-control" type="email" name="email" placeholder="@email.com" required>
+            <br>
+            <input class="form-control" type="password" name="password" placeholder="password" required>
+            <br>
+            <input class="buttonOne" value="Go Calmer!" type="submit" name="">
+            <br>
+          </form>
+            <a onclick="showLogin()" id="bottomLink">Login</a>
+	</div></center>
+</section>
+</body>
+<script type="text/javascript">
+function showLogin(){
+	document.getElementById("welcome").style.display="none";
+	document.getElementById("login").style.display="block";
+	document.getElementById("signUp").style.display="none";
+	$("#bottomLinkTwo").remove();
+}
+function showSignUp(){
+	document.getElementById("login").style.display="none";
+	document.getElementById("signUp").style.display="block";
+	$("#signUpForm").css("display","block");
+	$("#bottomLink").css("display","block");
+	$("#inform").html("Sign Up");
+}
+$("#signUpForm").submit(function(event){
+	console.log("ran");
+	event.preventDefault();
+	$.ajax({
+		url : "/signUp",
+		method : "post",
+		data : $("#signUpForm").serialize(),
+		success : function(resp){
+			if(resp=="OK"){
+				$("#inform").html("Signed up Successfully!");
+				$("#signUpForm").css("display","none");
+				$("#bottomLink").css("display","none");
+				$("#signUpHolder").append('<center><a onclick="showLogin()" id="bottomLinkTwo">Click here to Login!</a></center>');
+			}else{
+				alert("something went wrong : p");
+			}
+		}
+	})
+})
+
+</script>
+</html>

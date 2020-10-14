@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+	<title>Calmly</title>
+</head>
+<style type="text/css">
+	body {
+			background-image: linear-gradient( 109.6deg,  rgba(238,58,136,1) 11.2%, rgba(128,162,245,1) 91.1% );
+	background-size: 2000% 2000%;
+	animation: gradient 12s ease infinite;
+}
+.rightSide{
+	text-align: right;
+}
+.leftSide{
+	text-align: left;
+}
+.centerSide{
+	text-align: center;
+}
+	#realPlayer{
+	background:rgba(255,255,255, 0.8);
+	width: 20%;
+	padding: 15px;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+	#player{
+		display: none;
+	}
+	#playPause{
+		display: inline-block;
+		width: 30%;
+	}
+	#playerControls{
+		display: inline-block;
+		vertical-align: middle;
+		width: 70%;
+	}
+	#songTitle{
+		font-family: 'Poppins', sans-serif;
+		font-size: 24px;
+	}
+	#pp{
+		vertical-align: middle;
+	}
+	#titleHolder{
+		text-align: left;
+		vertical-align: text-top;
+	}
+	#progressBar{
+		height: 4px;
+		width : 0%;
+		background-color: red;
+		vertical-align: middle;
+	}
+	#progressBar:hover{
+		height: 4px;
+	}
+	#progressBarHolder{
+		text-align: left;
+		width: 100%;
+		background-color: #818181;
+	}
+	.menuDiv{
+		display: inline-block;
+		width: 33.33333%;
+		padding:8px;
+		vertical-align: middle;
+	}
+	#topName{
+		font-family: 'Dancing Script', cursive;
+	color: white;
+	font-size: 30px;
+	font-weight: bold;
+	}
+	.natureToggles{
+	height: 54px;
+    width: 54px;
+    margin: 5px;
+    background-color: white;
+    display: inline-block;
+    border-radius: 50% 50%;
+    padding: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	.naturePlayer{
+		display: none;
+	}
+	
+	input[type=range] {
+    display: block;
+    width: 45%;
+    background: none;
+}
+
+	#natureSounds{
+		text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 8px;
+	}
+	.imageS{
+		height: 35px;
+		width: 35px;
+	}
+	#volumeToggle{
+		width: 30%;
+	}
+	@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+	@media only screen and (max-width: 600px) {
+  #realPlayer{
+  	width: 90%;
+  }
+}
+</style>
+<body>
+<section id="questions">
+<div id="questionsHolder">
+	
+</div>	
+</section>
+<section>
+<div id="menu">
+	<div id="heart" class="menuDiv leftSide"><img th:src="@{images/fav.svg}" height="40px" width="40px"></div><div class="menuDiv centerSide" id="appname"><text id="topName">calm.ly</text></div><div id="profile" class="menuDiv rightSide"><img height="35px" width="35px" th:src="@{images/face.svg}"></div>
+</div>
+<br>
+
+<div id="songHolder">
+<center><div id="realPlayer">
+<audio controls id="player">
+  <source src="https://res.cloudinary.com/rutvikkapade/video/upload/v1602401763/inmovie_vp6nxv.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<div id="playPause"><center><img id="pp" th:src="@{images/play.svg}" height="75px" width="75px"></center></div><div id="playerControls">
+	<div id="titleHolder"><text id="songTitle">feel good</text></div>
+	<div id="progressBarHolder">
+		<div id="progressBar"></div>
+	</div>
+</div>
+</div></center>
+</div>
+</section>
+<br>
+<center><h3>you have successfully logged in ヾ(@^▽^@)ノ</h3></center>
+<center><h3>the app is under construction....(⌐■_■)</h3></center>
+<div id="natureSounds">
+		<audio controls loop id="thunderPlayer" class="naturePlayer">
+			  <source src="https://res.cloudinary.com/rutvikkapade/video/upload/v1602401795/1_Hour_Rain_and_Thunderstorm_Sounds_For_Focus_Relaxing_and_Sleep_%EF%B8%8F_Epidemic_ASMR_128_kbps_t0yuti.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+		</audio>
+		<audio controls loop id="windPlayer" class="naturePlayer">
+			  <source src="https://res.cloudinary.com/rutvikkapade/video/upload/v1602401796/1_Hour_WIND_SOUNDS_in_the_Mountains_Relaxing_Wind_Sounds_for_Sleeping_and_Relaxation_128_kbps_ouolr2.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+		</audio>
+		<audio controls loop id="birdPalyer" class="naturePlayer">
+			  <source src="https://res.cloudinary.com/rutvikkapade/video/upload/v1602401789/1_Hour_Birdsong_Sounds_on_a_Spring_Morning_in_English_Countryside_128_kbps_gbxnh6.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+		</audio>
+		<div class="natureToggles" id="thunderDiv">
+			<img  id="thunder" class="imageS" th:src="@{images/cloud.svg}">
+		</div>
+		<div class="natureToggles" id="windsDiv">
+			<img  id="winds" class="imageS" th:src="@{images/wind.svg}">
+		</div>
+		<div class="natureToggles" id="birdsDiv">
+			<img  id="birds" class="imageS" th:src="@{images/bird.svg}">
+		</div>
+		<div id="audioToggle"></div>
+	</div>
+</body>
+<script type="text/javascript">
+var thunderVar=0,windVar=0,birdVar=0;
+
+$(()=>{
+$.ajax({
+url : "/questions",
+method : "post",
+success: function(resp){
+	console.log(resp);
+}
+});
+});
+$("#pp").click(function(){
+	$("#player").get(0).play();
+});
+var progress=document.getElementById("player");
+progress.ontimeupdate=function(){
+	updateBar();
+}
+function updateBar(){
+	document.getElementById("progressBar").style.width=(progress.currentTime/progress.duration)*100+"%";
+}
+$("#thunder").click(function(){
+	var x=document.getElementById("thunderPlayer");
+
+if (thunderVar==0) {
+	$("#thunderPlayer").get(0).play();
+	thunderVar=1;
+	$("#thunderDiv").css("background-color","cyan");
+	$("#audioToggle").append('<center><input id="thunderPlayere" class="ranger" type="range" min="0" max="1" value="'+x.volume+'" step="0.0001" onchange="volume(this.id)"></center>');
+	setTimeout(()=>{$("#thunderPlayere").remove();},10000);
+}else{
+$("#thunderPlayer").get(0).pause();
+	thunderVar=0;
+	$("#thunderDiv").css("background-color","white");
+	$("#thunderPlayere").remove();
+}
+	
+});
+$("#winds").click(function(){
+	var x=document.getElementById("windPlayer");
+
+if (windVar==0) {
+	$("#windPlayer").get(0).play();
+	windVar=1;
+	$("#windsDiv").css("background-color","cyan");
+	$("#audioToggle").append('<center><input id="windPlayere" class="ranger" type="range" min="0" max="1" value="'+x.volume+'" step="0.0001" onchange="volume(this.id)"></center>');
+	setTimeout(()=>{$("#windPlayere").remove();},10000);
+}else{
+$("#windPlayer").get(0).pause();
+	windVar=0;
+	$("#windsDiv").css("background-color","white");
+	$("#windPlayere").remove();
+}
+	
+});
+function volume(id){
+	var id=id.substring(0, id.length-1);
+	var x=document.getElementById(id+"e");
+	var player=document.getElementById(id);
+	player.volume=x.value;
+}
+
+</script>
+</html>
