@@ -11,8 +11,12 @@
 	<title>Calmly</title>
 </head>
 <style type="text/css">
+	html{
+		scroll-behavior: smooth;
+	}
 	body {
-			background-image: linear-gradient( 109.6deg,  rgba(238,58,136,1) 11.2%, rgba(128,162,245,1) 91.1% );
+			background: rgb(19,163,76);
+background: radial-gradient(circle, rgba(19,163,76,0.8130602582830007) 7%, rgba(48,136,255,0.8494748241093313) 53%, rgba(255,0,224,0.7682423311121324) 100%);
 	background-size: 2000% 2000%;
 	animation: gradient 12s ease infinite;
 }
@@ -25,7 +29,7 @@
 .centerSide{
 	text-align: center;
 }
-	#realPlayer{
+	.realPlayer{
 	background:rgba(255,255,255, 0.8);
 	width: 20%;
 	padding: 15px;
@@ -33,39 +37,47 @@
 	border-radius: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-	#player{
+	.player{
 		display: none;
 	}
-	#playPause{
+	.playPause{
 		display: inline-block;
 		width: 30%;
 	}
-	#playerControls{
+	.playerControls{
 		display: inline-block;
 		vertical-align: middle;
 		width: 70%;
 	}
-	#songTitle{
+	.songTitle{
 		font-family: 'Poppins', sans-serif;
 		font-size: 24px;
 	}
-	#pp{
+	.songCategory{
+		font-family: 'Poppins', sans-serif;
+		font-size: 10px;
+	}
+	.pp{
 		vertical-align: middle;
 	}
-	#titleHolder{
+	.titleHolder{
 		text-align: left;
 		vertical-align: text-top;
 	}
-	#progressBar{
+	.categoryHolder{
+		text-align: left;
+		vertical-align: text-top;
+	}
+	.progressBar{
 		height: 4px;
 		width : 0%;
 		background-color: red;
 		vertical-align: middle;
 	}
-	#progressBar:hover{
+	.progressBar:hover{
 		height: 4px;
 	}
-	#progressBarHolder{
+	.progressBarHolder{
 		text-align: left;
 		width: 100%;
 		background-color: #818181;
@@ -81,6 +93,17 @@
 	color: white;
 	font-size: 30px;
 	font-weight: bold;
+	}
+	.songHolderOne{
+		position: absolute;
+    height: 75%;
+    width: 100%;
+    overflow-y: scroll;
+    padding: 8px;
+	}
+	.songHolderOne::-webkit-scrollbar{
+		display: none;
+
 	}
 	.natureToggles{
 	height: 54px;
@@ -99,6 +122,7 @@
 	input[type=range] {
     display: block;
     width: 45%;
+    background: none;
 }
 
 	#natureSounds{
@@ -126,8 +150,12 @@
 		background-position: 0% 50%;
 	}
 }
+.ppp{
+	display: none;
+	vertical-align: middle;
+}
 	@media only screen and (max-width: 600px) {
-  #realPlayer{
+  .realPlayer{
   	width: 90%;
   }
 }
@@ -144,24 +172,23 @@
 </div>
 <br>
 
-<div id="songHolder">
-<center><div id="realPlayer">
+<div id="songHolder" class="songHolderOne">
+<!--<center><div id="realPlayer">
 <audio controls id="player">
   <source src="https://res.cloudinary.com/rutvikkapade/video/upload/v1602401763/inmovie_vp6nxv.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
 </audio>
 <div id="playPause"><center><img id="pp" th:src="@{images/play.svg}" height="75px" width="75px"></center></div><div id="playerControls">
 	<div id="titleHolder"><text id="songTitle">feel good</text></div>
+	<div id="categoryHolder"><text id="songCategory">Categoty:Supe</text></div>
 	<div id="progressBarHolder">
 		<div id="progressBar"></div>
 	</div>
 </div>
-</div></center>
+</div></center>-->
 </div>
 </section>
 <br>
-<center><h3>you have successfully logged in ヾ(@^▽^@)ノ</h3></center>
-<center><h3>the app is under construction....(⌐■_■)</h3></center>
 <div id="natureSounds">
 		<audio controls loop id="thunderPlayer" class="naturePlayer">
 			  <source src="https://res.cloudinary.com/rutvikkapade/video/upload/v1602401795/1_Hour_Rain_and_Thunderstorm_Sounds_For_Focus_Relaxing_and_Sleep_%EF%B8%8F_Epidemic_ASMR_128_kbps_t0yuti.mp3" type="audio/mpeg">
@@ -171,7 +198,7 @@ Your browser does not support the audio element.
 			  <source src="https://res.cloudinary.com/rutvikkapade/video/upload/v1602401796/1_Hour_WIND_SOUNDS_in_the_Mountains_Relaxing_Wind_Sounds_for_Sleeping_and_Relaxation_128_kbps_ouolr2.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
 		</audio>
-		<audio controls loop id="birdPalyer" class="naturePlayer">
+		<audio controls loop id="birdPlayer" class="naturePlayer">
 			  <source src="https://res.cloudinary.com/rutvikkapade/video/upload/v1602401789/1_Hour_Birdsong_Sounds_on_a_Spring_Morning_in_English_Countryside_128_kbps_gbxnh6.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
 		</audio>
@@ -188,7 +215,7 @@ Your browser does not support the audio element.
 	</div>
 </body>
 <script type="text/javascript">
-var thunderVar=0,windVar=0,birdVar=0;
+var thunderVar=0,windVar=0,birdVar=0,progress=0;
 
 $(()=>{
 $.ajax({
@@ -198,17 +225,50 @@ success: function(resp){
 	console.log(resp);
 }
 });
+$.ajax({
+	url :"/music",
+	method : "get",
+	success : function(resp){
+		for(i in resp){
+			loadData(i,resp);
+		}
+	}
+})
 });
-$("#pp").click(function(){
-	$("#player").get(0).play();
-});
-var progress=document.getElementById("player");
+function playPlayer(id){
+var playerObj=document.getElementById("player"+id[id.length-1]);
+if(playerObj.paused){
+	progress=document.getElementById("player"+id[id.length-1]);
+	playerObj.play();
+	$("#pp"+id[id.length-1]).css("display","none");
+	$("#ppp"+id[id.length-1]).css("display","block");
+}else{
+	playerObj.pause();
+	$("#ppp"+id[id.length-1]).css("display","none");
+	$("#pp"+id[id.length-1]).css("display","block");
+}
+	
+}
 progress.ontimeupdate=function(){
 	updateBar();
-}
+    }
 function updateBar(){
 	document.getElementById("progressBar").style.width=(progress.currentTime/progress.duration)*100+"%";
 }
+
+function loadData(i,resp){
+$("#songHolder").append('<center><div class="realPlayer" id="realPlayer'+i+'"></div></center><br>');
+			$('#realPlayer'+i+'').append('<audio controls class="player" id="player'+i+'"></audio>');
+$('#player'+i+'').append('<source src="'+resp[i].audioApi+'" type="audio/mpeg">Your browser does not support the audio element.');
+$('#realPlayer'+i+'').append('<div id="playPause'+i+'" class="playPause"><center><img id="pp'+i+'" class="pp" src="https://res.cloudinary.com/rutvikkapade/image/upload/v1602676870/play_dm4sqi.svg" onclick="playPlayer(this.id)" height="75px" width="75px"><img id="ppp'+i+'" class="ppp" src="https://res.cloudinary.com/rutvikkapade/image/upload/v1602685312/pause_swzlmm.svg" onclick="playPlayer(this.id)" height="75px" width="75px"></center></div><div id="playerControls'+i+'" class="playerControls"></div>');
+$('#playerControls'+i+'').append('<div class="titleHolder"><text class="songTitle">'+resp[i].title+'</text></div>');
+$('#playerControls'+i+'').append('<div class="categoryHolder"><text class="songCategory">Categoty:'+resp[i].category+'</text></div>');
+$('#playerControls'+i+'').append('<div class="progressBarHolder"><div id="progressBar'+i+'"></div></div>');
+}
+
+
+
+
 $("#thunder").click(function(){
 	var x=document.getElementById("thunderPlayer");
 
@@ -240,6 +300,23 @@ $("#windPlayer").get(0).pause();
 	windVar=0;
 	$("#windsDiv").css("background-color","white");
 	$("#windPlayere").remove();
+}
+	
+});
+$("#birds").click(function(){
+	var x=document.getElementById("birdPlayer");
+
+if (birdVar==0) {
+	$("#birdPlayer").get(0).play();
+	birdVar=1;
+	$("#birdsDiv").css("background-color","cyan");
+	$("#audioToggle").append('<center><input id="birdPlayere" class="ranger" type="range" min="0" max="1" value="'+x.volume+'" step="0.0001" onchange="volume(this.id)"></center>');
+	setTimeout(()=>{$("#birdPlayere").remove();},10000);
+}else{
+$("#birdPlayer").get(0).pause();
+	birdVar=0;
+	$("#birdsDiv").css("background-color","white");
+	$("#birdPlayere").remove();
 }
 	
 });
